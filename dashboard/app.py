@@ -45,7 +45,7 @@ st.set_page_config(
 
 css_path = Path(__file__).parent / "assets" / "style.css"
 
-with open(css_path) as f:
+with open(css_path, encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # ======================================================
@@ -61,7 +61,17 @@ def load_resources():
         load_model(),
     )
 
-news_df, forecasting_df, feature_df, model = load_resources()
+try:
+    (
+        news_df,
+        forecasting_df,
+        feature_df,
+        model,
+    ) = load_resources()
+
+except Exception as e:
+    st.error(f"Failed loading resources:\n\n{e}")
+    st.stop()
 
 # ======================================================
 # Sidebar

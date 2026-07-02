@@ -105,3 +105,11 @@ NEGATIVE_COLOR = "#dc2626"
 NEUTRAL_COLOR = "#f59e0b"
 
 BACKGROUND_COLOR = "#f8fafc"
+
+# ==================================================
+# Hugging Face
+# ==================================================
+
+HF_DATASET_REPO = (
+    "chalimasadiah/stock-sentiment-assets"
+)

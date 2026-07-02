@@ -7,13 +7,15 @@ used by the Streamlit dashboard.
 
 import joblib
 import pandas as pd
+from src.download_assets import download_asset
 
-from config import (
-    FORECASTING_DATASET,
-    FEATURE_IMPORTANCE_DATASET,
-    NEWS_DATASET,
-    MODEL_PATH
-)
+
+# from config import (
+#     FORECASTING_DATASET,
+#     FEATURE_IMPORTANCE_DATASET,
+#     NEWS_DATASET,
+#     MODEL_PATH
+# )
 
 
 # =====================================================
@@ -26,9 +28,19 @@ def load_forecasting_dataset():
     for dashboard statistics.
     """
 
-    return pd.read_parquet(
-        FORECASTING_DATASET
-    )
+    try:
+
+        model_path = download_asset(
+            "forecasting_dataset.parquet"
+        )
+
+        return joblib.load(model_path)
+
+    except Exception as e:
+
+        raise RuntimeError(
+            f"Cannot load Forecasting Dataset: {e}"
+        )
 
 
 # =====================================================
@@ -41,9 +53,19 @@ def load_feature_importance():
     feature importance.
     """
 
-    return pd.read_parquet(
-        FEATURE_IMPORTANCE_DATASET
-    )
+    try:
+
+        model_path = download_asset(
+            "feature_importance.parquet"
+        )
+
+        return joblib.load(model_path)
+
+    except Exception as e:
+
+        raise RuntimeError(
+            f"Cannot load Feature Importance: {e}"
+        )
 
 
 # =====================================================
@@ -56,9 +78,19 @@ def load_news_dataset():
     economic news and sentiment labels.
     """
 
-    return pd.read_parquet(
-        NEWS_DATASET
-    )
+    try:
+
+        model_path = download_asset(
+            "news_with_sentiment.parquet"
+        )
+
+        return joblib.load(model_path)
+
+    except Exception as e:
+
+        raise RuntimeError(
+            f"Cannot load News with Sentiment: {e}"
+        )
 
 
 # =====================================================
@@ -70,6 +102,16 @@ def load_model():
     Load trained Random Forest model.
     """
 
-    return joblib.load(
-        MODEL_PATH
-    )
+    try:
+
+        model_path = download_asset(
+            "random_forest.pkl"
+        )
+
+        return joblib.load(model_path)
+
+    except Exception as e:
+
+        raise RuntimeError(
+            f"Cannot load Random Forest model: {e}"
+        )
