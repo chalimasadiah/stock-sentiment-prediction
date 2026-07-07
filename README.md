@@ -6,32 +6,53 @@
 ![Status](https://img.shields.io/badge/Status-Completed%20v1.0-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-An end-to-end Machine Learning project that predicts the next trading day's IHSG (Jakarta Composite Index) direction by combining economic news sentiment with technical market indicators. The project includes data preprocessing, feature engineering, model training, and an interactive dashboard built with Streamlit.
+This project develops an end-to-end machine learning pipeline to forecast the next-day direction of the Jakarta Composite Index (IHSG) by combining Indonesian economic news sentiment with technical market indicators. The project includes data preprocessing, feature engineering, model training, and an interactive dashboard built with Streamlit.
 
+## Live Demo
+
+- Streamlit Demo: Coming soon!
+- Medium Article: https://medium.com/@chalimasadiah_21544/can-economic-news-predict-the-stock-market-building-an-end-to-end-ml-pipeline-for-ihsg-forecasting-28624649a282?postPublishedType=repub
+- GitHub Repository: https://github.com/chalimasadiah/stock-sentiment-prediction
 ---
 
 ## Project Overview
 
-Financial markets are influenced not only by historical price movements but also by economic news and investor sentiment. Traditional forecasting models often rely solely on technical indicators and overlook textual information that reflects market expectations.
+Forecasting stock market movements is challenging because prices are influenced by both historical market behavior and external information such as economic news.
 
-This project integrates sentiment extracted from Indonesian economic news with historical IHSG market data to improve next-day market direction forecasting.
+Traditional forecasting models often rely solely on technical indicators, while ignoring textual information that reflects investor sentiment and market expectations.
 
-The complete pipeline consists of:
+This project develops an end-to-end machine learning pipeline to forecast the next-day direction of the Jakarta Composite Index (IHSG) by combining Indonesian economic news sentiment with technical market indicators.
 
-- Economic news collection
-- Rule-based sentiment analysis
-- Daily sentiment aggregation
-- Technical indicator engineering
-- Random Forest classification
-- Interactive dashboard for prediction and visualization
+The complete workflow includes:
+
+- Collecting Indonesian economic news articles
+- Performing rule-based sentiment analysis
+- Aggregating daily sentiment scores
+- Engineering technical indicators from historical IHSG market data
+- Training a Random Forest classifier
+- Deploying an interactive Streamlit dashboard for visualization and prediction
+
+The resulting dashboard allows users to explore historical market trends, analyze economic news sentiment, inspect feature importance, and generate next-day IHSG direction predictions.
 
 ---
 
-## Medium Article
+## Project Highlights
 
-Read the full project explanation here:
+✔ End-to-end ML pipeline
 
-> 🔗 https://medium.com/@chalimasadiah_21544/can-economic-news-predict-the-stock-market-building-an-end-to-end-ml-pipeline-for-ihsg-forecasting-28624649a282
+✔ Rule-based NLP sentiment analysis
+
+✔ Feature engineering using technical indicators
+
+✔ Random Forest classifier
+
+✔ Interactive Streamlit dashboard
+
+✔ Automatic asset downloading from Hugging Face
+
+✔ Business-oriented insights
+
+
 
 ---
 
@@ -51,26 +72,53 @@ This project aims to provide a decision-support tool by integrating both informa
 
 ## Dashboard Preview
 
-> Screenshots will be added after deployment.
 
-| Section  | Description                                  |
-| -------- | -------------------------------------------- |
-| Overview | Summary of key metrics and model performance |
+The Streamlit dashboard provides an interactive interface for exploring market sentiment, historical data, and next-day IHSG direction predictions.
+
+### 1. Dashboard Overview
+
+Displays key project metrics, market summary, and overall dashboard information.
+
 ![Overview](assets/image.png)
 
-| Sentiment Analysis | News classification and daily sentiment distribution |
+---
+
+### 2. Economic News Sentiment Analysis
+
+Shows the distribution of positive, neutral, and negative economic news, along with sentiment statistics and recent news analysis.
+
 ![Sentiment Analysis](assets/image-1.png)
 
-| Business Insight | Practical takeaways for investors |
+---
+
+### 3. Business Insight
+
+Provides business-oriented interpretations of market sentiment to help users better understand current market conditions.
+
 ![Business Insight](assets/image-2.png)
 
-| Forecasting | Next-day IHSG direction prediction interface |
+---
+
+### 4. IHSG Direction Prediction
+
+Allows users to generate next-day IHSG direction predictions using the trained Random Forest model based on technical indicators and aggregated news sentiment.
+
 ![Forecasting](assets/image-3.png)
 
-| Feature Importance | Which features influence the model the most |
+---
+
+### 5. Feature Importance
+
+Visualizes the contribution of each feature used by the Random Forest model, helping explain which variables have the greatest impact on predictions.
+
 ![Feature Importance](assets/image-4.png)
 
-| Dataset Overview | Summary of training and validation data |
+---
+
+### 6. Dataset Overview
+
+Summarizes the datasets used throughout the project, including forecasting data, sentiment data, and model inputs.
+
 ![Dataset Overview](assets/image-5.png)
 
 ---
@@ -109,17 +157,17 @@ Interactive Dashboard & Business Insight
 
 ## Dataset
 
-The datasets are excluded from this repository due to GitHub's file size limitations.
+To keep this repository lightweight, datasets and trained models are not tracked in Git.
 
-Please place the datasets inside:
+The dashboard automatically loads required assets in the following order:
 
-```
-data/raw/
-data/interim/
-data/processed/
-```
+1. Local sample_data/
+2. Local models/
+3. Hugging Face Dataset Repository
 
-Or regenerate them using the preprocessing notebooks.
+Dataset repository:
+
+[stock-sentiment-assets](https://huggingface.co/datasets/chalimasadiah/stock-sentiment-assets)
 
 **Data Sources:**
 
@@ -194,7 +242,9 @@ pip install -r requirements.txt
 ```bash
 streamlit run dashboard/app.py
 ```
+If local assets are unavailable, the dashboard automatically downloads them from the Hugging Face Dataset repository.
 
+No additional manual download is required.
 ---
 
 ## Project Structure
@@ -202,83 +252,90 @@ streamlit run dashboard/app.py
 ```
 stock_sentiment_prediction/
 
-├── dashboard/
-│   ├── app.py
-│   ├── components/
-│   ├── assets/
-│   └── services/
-│
-├── data/
-│   ├── raw/
-│   ├── interim/
-│   └── processed/
-│
-├── models/
-│
-├── notebooks/
-│
+├── Dockerfile
+├── README.md
+├── assets
+│   ├── image-1.png
+│   ├── image-2.png
+│   ├── image-3.png
+│   ├── image-4.png
+│   ├── image-5.png
+│   └── image.png
+├── dashboard
+│   ├── app.py
+│   ├── assets
+│   ├── components
+│   ├── config.py
+│   ├── data_loader.py
+│   └── sentiment_service.py
+├── sample_data                 # downloaded automatically
+├── models                      # downloaded automatically
+├── notebooks
+│   ├── 01_news_dataset_eda.ipynb
+│   ├── 02_sentiment_analysis.ipynb
+│   ├── 02a_manual_labeling.ipynb
+│   ├── 03_feature_engineering.ipynb
+│   └── 04_modeling.ipynb
 ├── requirements.txt
-│
-└── README.md
+├── scripts
+│   └── prepare_sample_data.py
+└── src
+    ├── __init__.py
+    ├── data_io.py
+    ├── data_validation.py
+    ├── download_assets.py
+    └── sentiment_utils.py
 ```
+Models and sample datasets are downloaded automatically from the Hugging Face Dataset repository when unavailable locally.
+---
+
+## Model Performance
+
+| Metric | Value |
+|---------|-------|
+| Accuracy | 75% |
+| Validation Strategy | Chronological Train-Test Split |
+
+## Current Status
+
+## Current Status
+
+| Item | Status |
+|------|--------|
+| Current Version | v1.0 |
+| Project Status | Baseline Implementation Completed |
+| Deployment | GitHub + Hugging Face Spaces |
+| Next Milestone | Real-time Prediction |
 
 ---
 
-## Current Limitations
+## Next milestone
 
-This version focuses on demonstrating the end-to-end machine learning workflow.
-
-Current limitations include:
-
-- Rule-based sentiment analysis (no language model yet)
-- Static historical dataset (no automatic updates)
-- No real-time news ingestion
-- Random Forest as the baseline model
-- Predicts market direction only, not price magnitude
+Real-time prediction
 
 ---
 
-## Future Improvements
+## Future Development
+Version 2
 
-### Version 2
+- Historical Backtesting
+- Live Prediction
 
-- Historical Simulation Mode (backtesting)
-- Live Prediction Mode using recent news
-- Real-time market data integration
-- Automatic technical indicator generation
+Version 3
 
-### Version 3
+- IndoBERT Sentiment
 
-- IndoBERT-based sentiment classification
-- Improved NLP preprocessing
+Version 4
 
-### Version 4
+- FastAPI Backend
+- Next.js Frontend
 
-- Additional macroeconomic indicators (USD/IDR, Gold Price, Oil Price, BI Rate)
+Version 5
 
-### Version 5
+- Docker
+- Cloud Deployment
 
-- Model comparison (LightGBM, XGBoost, CatBoost)
 
-### Version 6
-
-- Explainable AI (SHAP)
-- FastAPI backend
-- Next.js frontend
-- Docker containerization
-- Cloud deployment
-
----
-
-## Current Project Status
-
-| Item            | Details                              |
-| --------------- | ------------------------------------ |
-| Current Version | v1.0                                 |
-| Status          | Completed — Baseline Implementation  |
-| Next Milestone  | v2.0 — Live Prediction & Backtesting |
-
----
 
 ## References
 
@@ -307,7 +364,7 @@ Built as the final project for the **Pacmann Machine Learning Program**.
 
 **Chalima Sadiah**
 
-Aspiring Machine Learning Engineer passionate about developing AI-driven solutions for forecasting and decision support systems.
+Interested in Machine Learning Engineering, Applied AI, Forecasting, and Decision Support Systems.
 
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github)](https://github.com/chalimasadiah)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/chalimasadiah/)
