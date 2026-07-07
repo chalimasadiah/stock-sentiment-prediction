@@ -29,17 +29,17 @@ ASSETS_FOLDER = Path(__file__).resolve().parent / "assets"
 
 FORECASTING_DATASET = (
     SAMPLE_FOLDER /
-    "forecasting_dataset.parquet"
+    "forecasting_dataset.csv"
 )
 
 FEATURE_IMPORTANCE_DATASET = (
     SAMPLE_FOLDER /
-    "feature_importance.parquet"
+    "feature_importance.csv"
 )
 
 NEWS_DATASET = (
     SAMPLE_FOLDER /
-    "news_with_sentiment.parquet"
+    "news_with_sentiment.csv"
 )
 
 MODEL_PATH = (
@@ -106,10 +106,9 @@ NEUTRAL_COLOR = "#f59e0b"
 
 BACKGROUND_COLOR = "#f8fafc"
 
+
 # ==================================================
-# Hugging Face
+# Hugging Face Dataset Repository
 # ==================================================
 
-HF_DATASET_REPO = (
-    "chalimasadiah/stock-sentiment-assets"
-)
+HF_DATASET_REPO = "chalimasadiah/stock-sentiment-assets"

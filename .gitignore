@@ -3,6 +3,10 @@ data/raw/
 data/interim/
 data/processed/
 
+# Model & Deployment Assets
+models/
+sample_data/
+
 # Python
 .venv/
 __pycache__/
@@ -13,5 +17,3 @@ __pycache__/
 
 # Jupyter
 .ipynb_checkpoints/
-
-*:Zone.Identifier

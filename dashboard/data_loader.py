@@ -7,15 +7,8 @@ used by the Streamlit dashboard.
 
 import joblib
 import pandas as pd
+
 from src.download_assets import download_asset
-
-
-# from config import (
-#     FORECASTING_DATASET,
-#     FEATURE_IMPORTANCE_DATASET,
-#     NEWS_DATASET,
-#     MODEL_PATH
-# )
 
 
 # =====================================================
@@ -24,20 +17,17 @@ from src.download_assets import download_asset
 
 def load_forecasting_dataset():
     """
-    Load forecasting dataset used
-    for dashboard statistics.
+    Load forecasting dataset.
     """
 
     try:
-
-        model_path = download_asset(
-            "forecasting_dataset.parquet"
+        path = download_asset(
+            "forecasting_dataset.csv"
         )
 
-        return joblib.load(model_path)
+        return pd.read_csv(path)
 
     except Exception as e:
-
         raise RuntimeError(
             f"Cannot load Forecasting Dataset: {e}"
         )
@@ -49,20 +39,17 @@ def load_forecasting_dataset():
 
 def load_feature_importance():
     """
-    Load Random Forest
-    feature importance.
+    Load feature importance.
     """
 
     try:
-
-        model_path = download_asset(
-            "feature_importance.parquet"
+        path = download_asset(
+            "feature_importance.csv"
         )
 
-        return joblib.load(model_path)
+        return pd.read_csv(path)
 
     except Exception as e:
-
         raise RuntimeError(
             f"Cannot load Feature Importance: {e}"
         )
@@ -74,22 +61,19 @@ def load_feature_importance():
 
 def load_news_dataset():
     """
-    Load news dataset containing
-    economic news and sentiment labels.
+    Load news dataset.
     """
 
     try:
-
-        model_path = download_asset(
-            "news_with_sentiment.parquet"
+        path = download_asset(
+            "news_with_sentiment.csv"
         )
 
-        return joblib.load(model_path)
+        return pd.read_csv(path)
 
     except Exception as e:
-
         raise RuntimeError(
-            f"Cannot load News with Sentiment: {e}"
+            f"Cannot load News Dataset: {e}"
         )
 
 
@@ -103,15 +87,13 @@ def load_model():
     """
 
     try:
-
-        model_path = download_asset(
+        path = download_asset(
             "random_forest.pkl"
         )
 
-        return joblib.load(model_path)
+        return joblib.load(path)
 
     except Exception as e:
-
         raise RuntimeError(
-            f"Cannot load Random Forest model: {e}"
+            f"Cannot load Random Forest Model: {e}"
         )
